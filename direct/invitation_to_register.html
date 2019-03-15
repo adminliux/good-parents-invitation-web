@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
 		<script src="js/jquery.js"></script>
 		<script src="js/pub.js"></script>
+		<link href="css/pub.css" rel="stylesheet" media="screen" />
 		<link href="css/reg.css" rel="stylesheet" media="screen" />
 	</head>
 	<body>
@@ -36,8 +37,10 @@
 				<div class="img_center">
 					<input id="phone" type="number" class="but input_width input border-radius-but" placeholder="手机号:" />
 				</div>
-				<input id="code" class="but input border-radius-but" placeholder="验证码:" />
-				<div class="img_center dow_app border-radius-but but get_code">获取验证码</div>
+				<div>
+					<input id="code" class="but input border-radius-but code_input" placeholder="验证码:" />
+					<div class="img_center dow_app border-radius-but but get_code">获取验证码</div>
+				</div>
 			</div>
 			<div onclick="toDowApp()" class="img_center dow_app border-radius-but but">下载爸妈好APP</div>
 		</section>
@@ -51,7 +54,7 @@
 		}
 		var reg = false;
 		var size = 4;
-	
+
 		var code = getQueryString("code");
 		if (code) {
 			$.ajax({

@@ -1,0 +1,107 @@
+body,
+html {
+	padding: 0;
+	margin: 0;
+}
+
+.img_center {
+	vertical-align: middle;
+	text-align: center;
+}
+
+.user {
+	margin: 0 5% 0 5%;
+	box-shadow: #ccc 0 0 5px;
+	border-radius: 5px;
+	z-index: 3;
+}
+
+.top_b_2 {
+	width: 40%;
+	position: relative;
+	top: -5px;
+}
+
+.top_b {
+	width: 40%;
+}
+
+.name {
+	text-align: center;
+	display: block;
+}
+
+.desc {
+	margin: 5%;
+}
+
+.persion {
+	width: 5rem;
+	position: relative;
+	top: -2rem;
+	left: 2rem;
+}
+
+.content {
+	margin: 10%;
+	margin-top: 0;
+}
+
+.border-radius-but {
+	border-radius: 3rem;
+}
+
+.but {
+	background-color: #FC7239;
+	padding: 0.8rem 0 0.8rem 0;
+	margin-top: 1rem;
+}
+
+.dow_app {
+	color: #FFFFFF;
+}
+
+.input_width {
+	width: 85%;
+}
+
+.input {
+	border: 0;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	color: #FC7239;
+	background-color: #FFFFFF;
+	border: 0.15rem solid #FC7239;
+}
+
+input::-webkit-input-placeholder {
+	color: #FAD4C4;
+}
+
+.get_code {
+	float: right;
+	padding: 0.5rem;
+	position: relative;
+	top: 0.2rem;
+}
+
+.top_text {
+	margin-top: 0.4rem;
+	display: block;
+}
+
+.user_head {
+	position: relative;
+	margin-top: -12rem;
+}
+
+.user_head_portrait {
+	border: 0.2rem solid #FFFFFF;
+	box-shadow: #ccc 0 0 0.5rem;
+	border-radius: 50%;
+	width: 4rem;
+}
+
+.but_dis {
+	color: #CCCCCC;
+}

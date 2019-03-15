@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>邀请您加入爸妈好</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+		<script src="js/jquery.js"></script>
+		<script src="js/pub.js"></script>
+		<link href="css/reg.css" rel="stylesheet" media="screen" />
+	</head>
+	<body>
+		<header>
+			<div class="img_center">
+				<img src="img/top_back.png" width="80%" />
+				<div class="img_center user_head">
+					<img class="user_head_portrait" src="img/top_back.png" />
+				</div>
+			</div>
+			<div class="user">
+				<div class="img_center">
+					<img class="top_b_2" src="img/top_b_2.png" />
+				</div>
+				<div>
+					<h3 class="name" id="name">刘兴</h3>
+					<strong class="name top_text">邀请您加入爸妈好大家族</strong>
+					<span class="desc top_text">这里有好看的视频，好玩的动态，好多同龄人快来跟我一起玩把。</span>
+				</div>
+				<div class="img_center">
+					<img class="top_b" src="img/top_b.png" />
+				</div>
+			</div>
+			<img class="persion" src="img/persion.png" />
+		</header>
+		<section class="content">
+			<div>
+				<div class="img_center">
+					<input id="phone" type="number" class="but input_width input border-radius-but" placeholder="手机号:" />
+				</div>
+				<input id="code" class="but input border-radius-but" placeholder="验证码:" />
+				<div class="img_center dow_app border-radius-but but get_code">获取验证码</div>
+			</div>
+			<div onclick="toDowApp()" class="img_center dow_app border-radius-but but">下载爸妈好APP</div>
+		</section>
+	</body>
+	<script>
+		function getQueryString(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+			var r = window.location.search.substr(1).match(reg);
+			if (r != null) return unescape(r[2]);
+			return null;
+		}
+		var reg = false;
+		var size = 4;
+	
+		var code = getQueryString("code");
+		if (code) {
+			$.ajax({
+				url: host + "/user/invitation/invitation/info/" + code,
+				dataType: 'jsonp', //服务器返回json格式数据
+				type: 'get', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function(data) {
+					if (data.success) {
+						data = data.data;
+						var user = data.second;
+						$("#name").text(user.nickname);
+						$(".user_head_portrait").attr("src", user.headPortrait);
+					}
+				},
+				error: function(xhr, type, errorThrown) {
+
+				}
+			});
+		}
+
+		function toDowApp() {
+			if (!reg) {
+				alert("请先注册");
+				return;
+			}
+			location.href = "https://bmapp.yjhclub.com/";
+		}
+
+		function getPhone() {
+			return $("#phone").val();
+		}
+
+		function sendCode(phone) {
+			$.ajax({
+				url: host + "/sms/code/send/by/code",
+				data: {
+					phone: phone,
+					type: 0
+				},
+				dataType: 'jsonp', //服务器返回json格式数据
+				type: 'get', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function(data) {
+					alert(data.msg);
+				},
+				error: function(xhr, type, errorThrown) {
+
+				}
+			});
+		}
+
+		$(".get_code").click(function() {
+			var phone = getPhone();
+			if (phone.length == 11) {
+				sendCode(phone);
+			} else {
+				alert("手机号码不合法");
+			}
+		});
+
+		$('#code').bind('input propertychange', function() {
+			var smsCode = $(this).val();
+			var phone = getPhone();
+			if (smsCode.length == size && phone.length == 11) {
+				$.ajax({
+					url: host + "/user/invitation/registration/" + code + "/" + phone + "/" + smsCode,
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						alert(data.msg);
+						if (data.success) {
+							reg = true;
+							toDowApp();
+						}
+					},
+					error: function(xhr, type, errorThrown) {}
+				});
+			}
+		});
+	</script>
+</html>

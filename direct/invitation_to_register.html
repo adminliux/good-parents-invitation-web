@@ -33,6 +33,9 @@
 			<img class="persion" src="img/persion.png" />
 		</header>
 		<section class="content">
+			<div class="img_center">
+				<img src="img/qr.png" class="qr_img" style="width: 8rem;margin-top: -8rem;" />
+			</div>
 			<div>
 				<div class="img_center">
 					<input id="phone" type="number" class="but input_width input border-radius-but" placeholder="手机号:" />
@@ -65,8 +68,10 @@
 				success: function(data) {
 					if (data.success) {
 						data = data.data;
+						var info = data.first;
 						var user = data.second;
 						$("#name").text(user.nickname);
+						$(".qr_img").attr("src", info.qrCodeImage);
 						$(".user_head_portrait").attr("src", user.headPortrait);
 					}
 				},

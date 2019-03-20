@@ -55,7 +55,7 @@
 			if (r != null) return unescape(r[2]);
 			return null;
 		}
-		var reg = false;
+		var reg = true;
 		var size = 4;
 
 		var code = getQueryString("code");
@@ -131,9 +131,9 @@
 					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
+						reg = true;
 						alert(data.msg);
 						if (data.success) {
-							reg = true;
 							toDowApp();
 						}
 					},

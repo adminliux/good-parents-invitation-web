@@ -59,6 +59,9 @@
 		var size = 4;
 
 		var code = getQueryString("code");
+		var shareCode = getQueryString("share_code");
+		if (shareCode === "") shareCode = null;
+
 		if (code) {
 			$.ajax({
 				url: host + "/user/invitation/invitation/info/" + code,
@@ -127,6 +130,9 @@
 			if (smsCode.length == size && phone.length == 11) {
 				$.ajax({
 					url: host + "/user/invitation/registration/" + code + "/" + phone + "/" + smsCode,
+					data: {
+						shareCode: shareCode
+					}
 					dataType: 'json', //服务器返回json格式数据
 					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
